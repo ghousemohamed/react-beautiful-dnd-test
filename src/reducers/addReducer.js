@@ -1,4 +1,6 @@
-const initialData = {
+import { ADD_TASK } from "../actions/types";
+
+const initialState= {
     tasks: {
         'task-1': {id: 'task-1', content: 'Coding'},
         'task-2': {id: 'task-2', content: 'Engineering'},
@@ -36,8 +38,20 @@ const initialData = {
             taskIds: ['task-11', 'task-12', 'task-13']
         }
     },
-    columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
+    columnOrder: ['column-1', 'column-2', 'column-3', 'column-4'],
+    total: 14
     
 }
 
-export default initialData;
+export default function(state=initialState, action){
+    const {type, payload} = action
+    switch(type){
+        case ADD_TASK:
+            return {
+                ...state,
+                tasks: {...state.tasks, payload}
+            }
+        default:
+            return state;
+    }
+}  
